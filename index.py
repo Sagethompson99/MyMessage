@@ -17,22 +17,24 @@ def index():
 def marilyn():
     if request.method == 'POST':
         request_data = request.get_json()
-        file = open("messages_for_marilyn.txt", "a")  # append mode
-        file.write(request_data["message"])
-        file.close()
+        with open("messages_for_sage.txt", 'r+') as f:
+            content = f.read()
+            f.seek(0, 0)
+            f.write(request_data['message'] + '\n' + content)
         return render_template("marilyn.html")
     else:
-        file = open("messages_for_sage.txt", "r")
+        file = open("messages_for_marilyn.txt")
         return file.readline()
 
 @app.route('/sage', methods=['GET', 'POST'])
 def sage():
     if request.method == 'POST':
         request_data = request.get_json()
-        file = open("messages_for_sage.txt", "a")  # append mode
-        file.write(request_data["message"])
-        file.close()
+        with open("messages_for_marilyn.txt", 'r+') as f:
+            content = f.read()
+            f.seek(0, 0)
+            f.write(request_data['message'] + '\n' + content)
         return render_template("sage.html")
     else:
-        file = open("messages_for_sage.txt", "r")
+        file = open("messages_for_sage.txt")
         return file.readline()

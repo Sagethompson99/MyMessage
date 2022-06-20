@@ -24,7 +24,7 @@ def marilyn():
         return render_template("marilyn.html")
     else:
         file = open("messages_for_marilyn.txt")
-        return file.readline()
+        return '<h1>' + file.readline() + '</h1>'
 
 @app.route('/sage', methods=['GET', 'POST'])
 def sage():
@@ -37,4 +37,4 @@ def sage():
         return render_template("sage.html")
     else:
         file = open("messages_for_sage.txt")
-        return file.readline()
+        return '<h1>' + file.readline() + '</h1>'
